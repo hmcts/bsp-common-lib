@@ -1,0 +1,6 @@
+idam:
+  s2s-auth:
+    url: ${SERVICE_AUTH_PROVIDER_URL:http://localhost:4504}
+    microservice: ${SERVICE_AUTH_MICROSERVICE}
+    services-allowed-to-update: bulk_scan_orchestrator
+    services-allowed-to-validate: bulk_scan_processor
