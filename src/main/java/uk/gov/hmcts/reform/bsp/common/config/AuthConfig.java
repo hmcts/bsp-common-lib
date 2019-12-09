@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.bsp.config;
+package uk.gov.hmcts.reform.bsp.common.config;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

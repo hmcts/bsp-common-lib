@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.bsp.service;
+package uk.gov.hmcts.reform.bsp.common.service;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import uk.gov.hmcts.reform.authorisation.validators.ServiceAuthTokenValidator;
-import uk.gov.hmcts.reform.bsp.error.ForbiddenException;
-import uk.gov.hmcts.reform.bsp.error.UnauthenticatedException;
+import uk.gov.hmcts.reform.bsp.common.error.ForbiddenException;
+import uk.gov.hmcts.reform.bsp.common.error.UnauthenticatedException;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;

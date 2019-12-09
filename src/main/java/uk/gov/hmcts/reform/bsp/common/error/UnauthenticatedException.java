@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.bsp.error;
+package uk.gov.hmcts.reform.bsp.common.error;
 
 public class UnauthenticatedException extends RuntimeException {
 
