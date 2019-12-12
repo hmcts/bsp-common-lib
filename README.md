@@ -4,7 +4,7 @@ Common code for implementing Bulk Scanning
 
 ## Deployment
 
-Update the version number in build.gradle when making a change as the library will automatically be deployed upon merging to master.
+Update the version number in build.gradle when making a change as the library will automatically be deployed upon merging to master. (Also remember to bump the version number for bsp-common-lib in both Divorce COS & FR COS)
 
 ## Versioning
 
