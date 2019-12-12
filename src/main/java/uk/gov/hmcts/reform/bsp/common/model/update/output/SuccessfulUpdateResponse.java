@@ -3,7 +3,7 @@ package uk.gov.hmcts.reform.bsp.common.model.update.output;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
-import uk.gov.hmcts.reform.bsp.common.model.transformation.output.CaseCreationDetails;
+import uk.gov.hmcts.reform.bsp.common.model.transformation.output.CaseUpdateDetails;
 
 import java.util.List;
 
@@ -12,13 +12,13 @@ import java.util.List;
 public class SuccessfulUpdateResponse {
 
     @JsonProperty("case_update_details")
-    public final CaseCreationDetails caseUpdateDetails;
+    public final CaseUpdateDetails caseUpdateDetails;
 
     @JsonProperty("warnings")
     public final List<String> warnings;
 
     public SuccessfulUpdateResponse(
-        CaseCreationDetails caseUpdateDetails,
+        CaseUpdateDetails caseUpdateDetails,
         List<String> warnings) {
         this.caseUpdateDetails = caseUpdateDetails;
         this.warnings = warnings;
