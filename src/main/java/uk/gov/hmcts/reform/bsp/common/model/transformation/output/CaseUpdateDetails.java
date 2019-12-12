@@ -8,24 +8,19 @@ import java.util.Map;
 
 @Builder
 @Getter
-public class CaseCreationDetails {
+public class CaseUpdateDetails {
 
     @JsonProperty("case_type_id")
     private final String caseTypeId;
 
-    @JsonProperty("event_id")
-    private final String eventId;
-
     @JsonProperty("case_data")
     private final Map<String, Object> caseData;
 
-    public CaseCreationDetails(
+    public CaseUpdateDetails(
         String caseTypeId,
-        String eventId,
         Map<String, Object> caseData
     ) {
         this.caseTypeId = caseTypeId;
-        this.eventId = eventId;
         this.caseData = caseData;
     }
 }
