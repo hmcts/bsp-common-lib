@@ -1,5 +1,6 @@
 package uk.gov.hmcts.reform.bsp.common.service;
 
+import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -34,27 +35,35 @@ public class PostcodeValidatorTest {
     public void shouldProduceWarningWhenPostcodeHasLessThan6Characters() {
         String[] invalidPostcodes = {"N", "B1", "SE4", "BT7Q", "SW15P", "M11 A", "CV30A"};
 
-        for (String invalidPostcode : invalidPostcodes) {
-            Map<String, String> invalidPostcodeFieldMap = new HashMap<>();
-            invalidPostcodeFieldMap.put(d8PetitionerPostcodeKey, invalidPostcode);
-
-            List<String> actualValidationMessages = validatePostcode(invalidPostcodeFieldMap, d8PetitionerPostcodeKey);
-
-            assertThat(actualValidationMessages, hasItem(String.format("%s %s", d8PetitionerPostcodeKey, postcodeValidationErrorMessage)));
-        }
+        validateForInput(invalidPostcodes);
     }
 
     @Test
     public void shouldProduceWarningWhenPostcodeHasMoreThan8Characters() {
         String[] invalidPostcodes = {"SW15 1PXX", "M11 12HEQ", "BT12   8TR", "BIRMINGHAM1", "LT1REEEEE"};
 
+        validateForInput(invalidPostcodes);
+    }
+
+    @Test
+    public void shouldProduceWarningWhenPostcodeIsEmptyOrWhitespace() {
+        String[] invalidPostcodes = {"", " ", "\t", "\n"};
+
+        validateForInput(invalidPostcodes);
+    }
+
+    private Matcher<Iterable<? super String>> assertValidationErrors() {
+        return hasItem(String.format("%s %s", d8PetitionerPostcodeKey, postcodeValidationErrorMessage));
+    }
+
+    private void validateForInput(String[] invalidPostcodes) {
         for (String invalidPostcode : invalidPostcodes) {
             Map<String, String> invalidPostcodeFieldMap = new HashMap<>();
             invalidPostcodeFieldMap.put(d8PetitionerPostcodeKey, invalidPostcode);
 
             List<String> actualValidationMessages = validatePostcode(invalidPostcodeFieldMap, d8PetitionerPostcodeKey);
 
-            assertThat(actualValidationMessages, hasItem(String.format("%s %s", d8PetitionerPostcodeKey, postcodeValidationErrorMessage)));
+            assertThat(actualValidationMessages, assertValidationErrors());
         }
     }
 }
