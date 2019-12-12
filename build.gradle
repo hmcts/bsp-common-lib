@@ -21,7 +21,7 @@ plugins {
 apply plugin: 'org.springframework.boot'
 
 group 'uk.gov.hmcts.reform'
-version '0.0.11'
+version '0.0.12'
 
 dependencyUpdates.resolutionStrategy = {
     componentSelection { rules ->
