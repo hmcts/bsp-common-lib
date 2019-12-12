@@ -1,3 +1,12 @@
+buildscript {
+    ext {
+        springBootVersion = '2.2.1.RELEASE'
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
 plugins {
     id 'checkstyle'
     id 'com.github.ben-manes.versions' version '0.22.0'
@@ -6,11 +15,13 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'net.ltgt.apt' version '0.21'
-    id 'org.springframework.boot' version '2.1.7.RELEASE'
+    id 'org.springframework.boot' version '2.2.0.RELEASE'
 }
 
+apply plugin: 'org.springframework.boot'
+
 group 'uk.gov.hmcts.reform'
-version '0.0.4'
+version '0.0.5'
 
 dependencyUpdates.resolutionStrategy = {
     componentSelection { rules ->
@@ -129,15 +140,27 @@ bintray {
 
 def versions = [
     commonsLang3          : '3.9',
+    lombokVersion         : '1.16.18',
     serviceTokenGenerator : '3.0.0',
+    springfoxSwagger      : '2.9.2',
+    junit                 : '4.12',
+    lombokVersion         : '1.16.18',
+    mockito               : '3.2.0'
 ]
 
 dependencies {
-    implementation group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: versions.serviceTokenGenerator
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: versions.springfoxSwagger
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: versions.commonsLang3
+    implementation group: 'org.projectlombok', name: 'lombok', version: versions.lombokVersion
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    implementation group: 'uk.gov.hmcts.reform', name: 'service-auth-provider-client', version: versions.serviceTokenGenerator
 
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.2.0'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: versions.lombok
+
+    testImplementation group: 'junit', name: 'junit', version: versions.junit
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: versions.mockito
 }
 
 wrapper {
