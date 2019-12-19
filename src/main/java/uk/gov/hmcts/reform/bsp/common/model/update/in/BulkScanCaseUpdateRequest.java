@@ -10,13 +10,13 @@ import java.util.Map;
 public class BulkScanCaseUpdateRequest {
 
     private final ExceptionRecord exceptionRecord;
-    private final Map<String, Object> caseData;
+    private final CaseDetails caseDetails;
 
     public BulkScanCaseUpdateRequest(
         @JsonProperty("exception_record") ExceptionRecord exceptionRecord,
-        @JsonProperty("case_details") Map<String, Object> caseData
+        @JsonProperty("case_details") CaseDetails caseDetails
     ) {
         this.exceptionRecord = exceptionRecord;
-        this.caseData = caseData;
+        this.caseDetails = caseDetails;
     }
 }
