@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import uk.gov.hmcts.reform.bsp.common.model.transformation.in.ExceptionRecord;
 
-import java.util.Map;
-
 @Getter
 public class BulkScanCaseUpdateRequest {
 
