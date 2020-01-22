@@ -17,19 +17,21 @@ public class OcrValidationResultTest {
         assertThat(warningAndErrorMessagesResult.getStatus(), is(ValidationStatus.ERRORS));
 
         OcrValidationResult errorMessagesOnlyResult = OcrValidationResult.builder().addError("Error message").build();
+
         assertThat(errorMessagesOnlyResult.getStatus(), is(ValidationStatus.ERRORS));
     }
 
     @Test
     public void shouldHaveWarningsStatusWhenThereIs_WarningMessage_ButNoErrorMessage() {
         OcrValidationResult warningMessagesOnlyResult = OcrValidationResult.builder().addWarning("Error message").build();
+
         assertThat(warningMessagesOnlyResult.getStatus(), is(ValidationStatus.WARNINGS));
     }
 
     @Test
     public void shouldHaveSuccessStatusWhenThereIs_NoWarningMessage_NorErrorMessage() {
         OcrValidationResult noMessagesResult = OcrValidationResult.builder().build();
+
         assertThat(noMessagesResult.getStatus(), is(SUCCESS));
     }
-
 }

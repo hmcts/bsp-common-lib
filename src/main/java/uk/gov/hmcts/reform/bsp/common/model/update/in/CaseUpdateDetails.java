@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.bsp.common.model.transformation.output;
+package uk.gov.hmcts.reform.bsp.common.model.update.in;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

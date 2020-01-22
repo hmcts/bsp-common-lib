@@ -15,5 +15,5 @@ public class SuccessfulTransformationResponse {
     private final CaseCreationDetails caseCreationDetails;
 
     @JsonProperty("warnings")
-    private final List<String> warnings = new ArrayList<>();
+    @Builder.Default private final List<String> warnings = new ArrayList<>();
 }
