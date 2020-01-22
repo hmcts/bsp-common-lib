@@ -20,9 +20,9 @@ public class AuthService {
     private final List<String> allowedToUpdate;
 
     public AuthService(
-        AuthTokenValidator authTokenValidator,
-        @Value("${idam.s2s-auth.services-allowed-to-validate}") List<String> allowedToValidate,
-        @Value("${idam.s2s-auth.services-allowed-to-update}") List<String> allowedToUpdate
+            AuthTokenValidator authTokenValidator,
+            @Value("${idam.s2s-auth.services-allowed-to-validate}") List<String> allowedToValidate,
+            @Value("${idam.s2s-auth.services-allowed-to-update}") List<String> allowedToUpdate
     ) {
         this.authTokenValidator = authTokenValidator;
         this.allowedToValidate = allowedToValidate;
