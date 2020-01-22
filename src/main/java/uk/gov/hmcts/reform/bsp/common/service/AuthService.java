@@ -53,4 +53,3 @@ public class AuthService {
         return authTokenValidator.getServiceName(authHeader);
     }
 }
-

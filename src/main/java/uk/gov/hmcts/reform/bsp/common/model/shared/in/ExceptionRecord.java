@@ -24,5 +24,4 @@ public class ExceptionRecord {
 
     @JsonProperty("ocr_data_fields")
     private final List<OcrDataField> ocrDataFields;
-
 }

@@ -2,11 +2,13 @@ package uk.gov.hmcts.reform.bsp.common.model.shared.out;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Builder
+@Getter
 public class BspErrorResponse {
 
     @JsonProperty("errors")
