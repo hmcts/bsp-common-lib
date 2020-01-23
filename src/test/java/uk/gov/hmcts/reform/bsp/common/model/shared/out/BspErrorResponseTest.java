@@ -1,14 +1,12 @@
 package uk.gov.hmcts.reform.bsp.common.model.shared.out;
 
-import org.hamcrest.Matcher;
 import org.junit.Test;
-
-import java.util.List;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static uk.gov.hmcts.reform.bsp.common.utils.TestUtils.isEmptyList;
 
 public class BspErrorResponseTest {
 
@@ -34,10 +32,6 @@ public class BspErrorResponseTest {
 
         assertThat(model.getErrors().size(), is(2));
         assertThat(model.getWarnings().size(), is(1));
-    }
-
-    private static Matcher<List<?>> isEmptyList() {
-        return is(emptyList());
     }
 
 }
