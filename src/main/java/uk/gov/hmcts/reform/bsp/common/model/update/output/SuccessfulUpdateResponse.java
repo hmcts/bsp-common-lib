@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import uk.gov.hmcts.reform.bsp.common.model.shared.CaseDetails;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -12,15 +13,9 @@ import java.util.List;
 public class SuccessfulUpdateResponse {
 
     @JsonProperty("case_update_details")
-    public final CaseDetails caseDetails;
+    private final CaseDetails caseDetails;
 
     @JsonProperty("warnings")
-    public final List<String> warnings;
-
-    public SuccessfulUpdateResponse(
-            CaseDetails caseDetails,
-            List<String> warnings) {
-        this.caseDetails = caseDetails;
-        this.warnings = warnings;
-    }
+    @Builder.Default
+    private List<String> warnings = new ArrayList<>();
 }
