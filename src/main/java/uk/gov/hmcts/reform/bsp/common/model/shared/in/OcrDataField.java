@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.bsp.common.model.validation.in;
+package uk.gov.hmcts.reform.bsp.common.model.shared.in;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,8 +15,8 @@ public class OcrDataField {
 
     @JsonCreator
     public OcrDataField(
-        @JsonProperty("name") String name,
-        @JsonProperty("value") String value
+            @JsonProperty("name") String name,
+            @JsonProperty("value") String value
     ) {
         this.name = name;
         this.value = value;

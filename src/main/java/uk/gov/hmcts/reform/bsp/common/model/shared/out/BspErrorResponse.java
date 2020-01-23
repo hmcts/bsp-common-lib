@@ -1,18 +1,19 @@
-package uk.gov.hmcts.reform.bsp.common.model.transformation.output;
+package uk.gov.hmcts.reform.bsp.common.model.shared.out;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Builder
-public class SuccessfulTransformationResponse {
+@Getter
+public class BspErrorResponse {
 
-    @JsonProperty("case_creation_details")
-    private final CaseCreationDetails caseCreationDetails;
+    @JsonProperty("errors")
+    @Builder.Default
+    private final List<String> errors = new ArrayList<>();
 
     @JsonProperty("warnings")
     @Builder.Default

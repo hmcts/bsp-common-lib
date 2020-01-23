@@ -1,9 +1,8 @@
-package uk.gov.hmcts.reform.bsp.common.model.transformation.in;
+package uk.gov.hmcts.reform.bsp.common.model.shared.in;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
-import uk.gov.hmcts.reform.bsp.common.model.validation.in.OcrDataField;
 
 import java.util.List;
 
@@ -25,5 +24,4 @@ public class ExceptionRecord {
 
     @JsonProperty("ocr_data_fields")
     private final List<OcrDataField> ocrDataFields;
-
 }
