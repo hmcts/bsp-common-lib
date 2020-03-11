@@ -12,7 +12,7 @@ public class RegExpValidator {
         if (data.containsKey(field)) {
             String valueToValidate = data.get(field);
             if (!valueToValidate.matches(validationRegex)) {
-                validationMessages.add(field + " is not in a valid format");
+                validationMessages.add(String.format("%s is not in a valid format", field));
             }
         }
 
