@@ -1,7 +1,6 @@
 package uk.gov.hmcts.reform.bsp.common.service.validation;
 
 import com.google.common.collect.ImmutableMap;
-import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 import java.util.Map;
@@ -17,7 +16,7 @@ public class RegExpValidatorTest {
     public void shouldReturnEmptyListOfValidationErrorsWhenFieldIsValid() {
         Map<String, String> input = buildMap("email", "valid@email.com");
 
-        MatcherAssert.assertThat(RegExpValidator.validateField(input, "email", CCD_EMAIL_REGEX), isEmptyList());
+        assertThat(RegExpValidator.validateField(input, "email", CCD_EMAIL_REGEX), isEmptyList());
     }
 
     @Test
