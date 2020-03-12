@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.bsp.common.service;
+package uk.gov.hmcts.reform.bsp.common.service.validation;
 
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static uk.gov.hmcts.reform.bsp.common.service.PostcodeValidator.validatePostcode;
+import static uk.gov.hmcts.reform.bsp.common.service.validation.PostcodeValidator.validatePostcode;
 
 public class PostcodeValidatorTest {
 
