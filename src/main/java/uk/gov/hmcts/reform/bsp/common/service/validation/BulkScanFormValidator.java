@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.bsp.common.service;
+package uk.gov.hmcts.reform.bsp.common.service.validation;
 
 import org.apache.commons.lang3.StringUtils;
 import uk.gov.hmcts.reform.bsp.common.model.shared.in.OcrDataField;

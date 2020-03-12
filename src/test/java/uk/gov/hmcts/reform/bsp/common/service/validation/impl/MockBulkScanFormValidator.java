@@ -1,4 +1,6 @@
-package uk.gov.hmcts.reform.bsp.common.service;
+package uk.gov.hmcts.reform.bsp.common.service.validation.impl;
+
+import uk.gov.hmcts.reform.bsp.common.service.validation.BulkScanFormValidator;
 
 import java.util.ArrayList;
 import java.util.HashMap;

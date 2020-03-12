@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.bsp.common.service;
+package uk.gov.hmcts.reform.bsp.common.service.validation;
 
 import java.util.ArrayList;
 import java.util.List;

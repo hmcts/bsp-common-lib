@@ -1,7 +1,6 @@
-package uk.gov.hmcts.reform.bsp.common.errors;
+package uk.gov.hmcts.reform.bsp.common.error;
 
 import org.junit.Test;
-import uk.gov.hmcts.reform.bsp.common.error.InvalidDataException;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;

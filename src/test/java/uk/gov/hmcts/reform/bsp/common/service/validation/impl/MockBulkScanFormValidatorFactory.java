@@ -1,6 +1,7 @@
-package uk.gov.hmcts.reform.bsp.common.service;
+package uk.gov.hmcts.reform.bsp.common.service.validation.impl;
 
 import org.springframework.stereotype.Component;
+import uk.gov.hmcts.reform.bsp.common.service.validation.BulkScanFormValidatorFactory;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;

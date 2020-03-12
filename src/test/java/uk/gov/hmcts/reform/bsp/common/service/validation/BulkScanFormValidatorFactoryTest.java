@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.bsp.common.service;
+package uk.gov.hmcts.reform.bsp.common.service.validation;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 import uk.gov.hmcts.reform.bsp.common.error.UnsupportedFormTypeException;
+import uk.gov.hmcts.reform.bsp.common.service.validation.impl.MockBulkScanFormValidator;
+import uk.gov.hmcts.reform.bsp.common.service.validation.impl.MockBulkScanFormValidatorFactory;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -31,7 +33,7 @@ public class BulkScanFormValidatorFactoryTest {
     }
 
     @Test(expected = UnsupportedFormTypeException.class)
-    public void getValidatorThrowsException() {
-        bulkScanFormValidatorFactory.getValidator("there is not validator for this name");
+    public void getValidatorThrowsUnsupportedFormTypeException() {
+        bulkScanFormValidatorFactory.getValidator("there is no validator for this name");
     }
 }

@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.bsp.common.service;
+package uk.gov.hmcts.reform.bsp.common.service.validation;
 
 import uk.gov.hmcts.reform.bsp.common.error.UnsupportedFormTypeException;
 
