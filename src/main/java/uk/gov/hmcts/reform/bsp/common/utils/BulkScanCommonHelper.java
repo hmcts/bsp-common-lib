@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.time.format.ResolverStyle.STRICT;
@@ -22,6 +23,10 @@ public class BulkScanCommonHelper {
 
     private static final DateTimeFormatter EXPECTED_DATE_FORMAT_FROM_FORM = DateTimeFormatter
         .ofPattern("dd/MM/uuuu")
+        .withResolverStyle(STRICT);
+
+    private static final DateTimeFormatter CCD_DATE_FORMAT = DateTimeFormatter
+        .ofPattern("uuuu-MM-dd")
         .withResolverStyle(STRICT);
 
     /**
@@ -41,6 +46,25 @@ public class BulkScanCommonHelper {
         }
     }
 
+    public static String transformFormDateIntoCcdDate(String formFieldName, String formDate) {
+        return transformFormDateIntoLocalDate(formFieldName, formDate).format(CCD_DATE_FORMAT);
+    }
+
+    /**
+     * Validates that value from given field is a valid date and returns an optional validation message.
+     */
+    public static Optional<String> validateFormDate(Map<String, String> fieldsMap, String fieldName) {
+        Optional<String> validationMessage = Optional.empty();
+
+        try {
+            Optional.ofNullable(fieldsMap.get(fieldName))
+                .ifPresent(formDate -> transformFormDateIntoLocalDate(fieldName, formDate));
+        } catch (FormFieldValidationException exception) {
+            validationMessage = Optional.of(exception.getMessage());
+        }
+
+        return validationMessage;
+    }
     /**
      * The following assumptions are in place.
      * - the delimiter is a comma followed by a space ", "
