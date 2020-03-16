@@ -65,6 +65,7 @@ public class BulkScanCommonHelper {
 
         return validationMessage;
     }
+
     /**
      * The following assumptions are in place.
      * - the delimiter is a comma followed by a space ", "
