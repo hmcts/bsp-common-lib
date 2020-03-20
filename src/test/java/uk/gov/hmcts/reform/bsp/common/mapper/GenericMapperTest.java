@@ -13,8 +13,8 @@ import java.util.Optional;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static uk.gov.hmcts.reform.bsp.common.mapper.GenericMapper.getValueFromOcrDataFields;
 import static uk.gov.hmcts.reform.bsp.common.mapper.GenericMapper.addMappingsTo;
+import static uk.gov.hmcts.reform.bsp.common.mapper.GenericMapper.getValueFromOcrDataFields;
 
 public class GenericMapperTest {
 
@@ -59,7 +59,7 @@ public class GenericMapperTest {
     }
 
     @Test
-    public void addMappingsToShouldMapOCRFieldsIntoCCDLikeFields() {
+    public void addMappingsToShouldMapOcrFieldsIntoCcdFields() {
         List<OcrDataField> input = asList(
             new OcrDataField("OCR_ParentObjectField1", "ok"),
             new OcrDataField("OCR_ParentObjectField2", "fine"),
@@ -86,7 +86,7 @@ public class GenericMapperTest {
     }
 
     @Test
-    public void addMappingsToShouldMapTheLastDefinedValueWhenCCDFieldIsRedefined() {
+    public void addMappingsToShouldMapTheLastDefinedValueWhenCcdFieldIsRedefined() {
         List<OcrDataField> input = asList(
             new OcrDataField("OCR_ParentObjectField1", "ok"),
             new OcrDataField("OCR_ParentObjectField2", "fine")
@@ -105,7 +105,6 @@ public class GenericMapperTest {
         );
 
         Map<String, Object> result = (Map)caseData.get("extractedObject");
-
         assertThat(result.size(), is(1));
         assertThat(result.get("FieldDefinedTwice"), is("fine"));
     }
@@ -136,7 +135,7 @@ public class GenericMapperTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void addMappingsToShouldThrowIllegalArgumentExceptionWhenOCRFieldKeyDuplicatedInMap() {
+    public void addMappingsToShouldThrowIllegalArgumentExceptionWhenOcrFieldKeyDuplicatedInMap() {
         List<OcrDataField> input = asList(
             new OcrDataField("OCR_ParentObjectField1", "ok")
         );
