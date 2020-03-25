@@ -25,7 +25,7 @@ public class GenericMapper {
 
     public static Optional<String> getValueFromOcrDataFields(String fieldName, List<OcrDataField> ocrDataFields) {
         return ocrDataFields.stream()
-            .filter(f -> f.getName().equals(fieldName))
+            .filter(f -> f.getName().equals(fieldName) && f.getValue() != null)
             .map(OcrDataField::getValue)
             .findFirst();
     }
