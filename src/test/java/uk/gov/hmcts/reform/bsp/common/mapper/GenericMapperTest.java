@@ -18,15 +18,16 @@ import static uk.gov.hmcts.reform.bsp.common.mapper.GenericMapper.getValueFromOc
 
 public class GenericMapperTest {
 
-    public static final String LINE_1 = "102 Petty France";
-    public static final String TOWN = "London";
-    public static final String POSTCODE = "SW8 2PX";
-    public static final String COUNTY = "Greater London";
-    public static final String COUNTRY = "UK";
-
     @Test
     public void getValueFromOcrDataFieldsGetsEmptyWhenEmptyList() {
         List<OcrDataField> input = Collections.emptyList();
+
+        assertThat(getValueFromOcrDataFields("myField", input), is(Optional.empty()));
+    }
+
+    @Test
+    public void getValueFromOcrDataFieldsGetsEmptyWhenValueOfTheFoundElementIsNull() {
+        List<OcrDataField> input = asList(new OcrDataField("myField", null));
 
         assertThat(getValueFromOcrDataFields("myField", input), is(Optional.empty()));
     }
@@ -78,7 +79,7 @@ public class GenericMapperTest {
             input
         );
 
-        Map<String, Object> result = (Map)caseData.get("extractedObject");
+        Map<String, Object> result = (Map) caseData.get("extractedObject");
 
         assertThat(result.size(), is(2));
         assertThat(result.get("parentObjectField1"), is("ok"));
@@ -104,7 +105,8 @@ public class GenericMapperTest {
             input
         );
 
-        Map<String, Object> result = (Map)caseData.get("extractedObject");
+        Map<String, Object> result = (Map) caseData.get("extractedObject");
+
         assertThat(result.size(), is(1));
         assertThat(result.get("FieldDefinedTwice"), is("fine"));
     }
@@ -128,7 +130,7 @@ public class GenericMapperTest {
             input
         );
 
-        Map<String, Object> result = (Map)caseData.get("extractedObject");
+        Map<String, Object> result = (Map) caseData.get("extractedObject");
 
         assertThat(result.size(), is(1));
         assertThat(result.get("parentObjectField1"), is("ok"));
