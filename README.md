@@ -6,6 +6,10 @@ Common code for implementing Bulk Scanning
 
 Update the version number in build.gradle when making a change as the library will automatically be deployed upon merging to master. (Also remember to bump the version number for bsp-common-lib in both Divorce COS & FR COS)
 
+### Working locally
+
+To deploy to local maven repository use `./gradlew publishMainPublicationToMavenLocal`. The other project will need to include local maven to its list of repositories.
+
 ## Testing end-to-end with BSP
 
 If you need to perform an end-to-end test with BSP, please have a look into this article for more information:
