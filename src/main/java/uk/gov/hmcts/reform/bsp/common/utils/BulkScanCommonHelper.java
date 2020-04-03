@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static java.time.format.ResolverStyle.STRICT;
@@ -28,6 +29,8 @@ public class BulkScanCommonHelper {
     private static final DateTimeFormatter CCD_DATE_FORMAT = DateTimeFormatter
         .ofPattern("uuuu-MM-dd")
         .withResolverStyle(STRICT);
+
+    private static final Pattern COMMA_AND_WHITESPACE = Pattern.compile(",\\s*");
 
     /**
      * Returns map with only the fields that were not blank from the OCR data.
@@ -68,7 +71,7 @@ public class BulkScanCommonHelper {
 
     /**
      * The following assumptions are in place.
-     * - the delimiter is a comma followed by a space ", "
+     * - the delimiter is a comma possibly followed by a number of whitespace characters: ",\\s*" regex
      * - leading and trailing white spaces for each entry are removed - consequentially an empty entry will be discarded
      * so a warning will not be raised on further processing
      *
@@ -79,7 +82,7 @@ public class BulkScanCommonHelper {
         if (commaSeparatedString.isEmpty()) {
             return Collections.emptyList();
         }
-        return Splitter.on(", ").splitToList(commaSeparatedString)
+        return Splitter.on(COMMA_AND_WHITESPACE).splitToList(commaSeparatedString)
             .stream()
             .filter(Objects::nonNull)
             .map(String::trim)
