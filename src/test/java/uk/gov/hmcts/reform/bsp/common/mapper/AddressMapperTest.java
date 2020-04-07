@@ -64,4 +64,27 @@ public class AddressMapperTest {
         assertThat(address.get("AddressLine1"), is(LINE_1));
         assertThat(address.get("Country"), is(COUNTRY));
     }
+
+    @Test
+    public void applyMappingsShouldMapOnlyNonNullValues() {
+        List<OcrDataField> input = asList(
+            new OcrDataField("MyAddressLine1", LINE_1),
+            new OcrDataField("MyAddressLine2", null),
+            new OcrDataField("MyAddressPostcode", ""),
+            new OcrDataField("MyAddressTown", " "),
+            new OcrDataField("MyAddressCountry", COUNTRY)
+        );
+
+        HashMap<String, Object> caseData = new HashMap<>();
+
+        applyMappings("my", "personalAddress", input, caseData);
+
+        Map<String, String> address = (Map)caseData.get("personalAddress");
+
+        assertThat(address.size(), is(4));
+        assertThat(address.get("AddressLine1"), is(LINE_1));
+        assertThat(address.get("Country"), is(COUNTRY));
+        assertThat(address.get("PostTown"), is(" "));
+        assertThat(address.get("PostCode"), is(""));
+    }
 }
