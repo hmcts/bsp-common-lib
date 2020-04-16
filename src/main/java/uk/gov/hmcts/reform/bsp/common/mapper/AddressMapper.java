@@ -12,6 +12,25 @@ import static uk.gov.hmcts.reform.bsp.common.mapper.GenericMapper.addMappingsTo;
 
 public class AddressMapper {
 
+    public class Field {
+        public static final String LINE_1 = "AddressLine1";
+        public static final String LINE_2 = "AddressLine2";
+        public static final String POSTCODE = "PostCode";
+        public static final String TOWN = "PostTown";
+        public static final String COUNTY = "County";
+        public static final String COUNTRY = "Country";
+    }
+
+    public class OcrSuffix {
+        public static final String ADDRESS = "Address";
+        public static final String LINE_1 = "Line1";
+        public static final String LINE_2 = "Line2";
+        public static final String TOWN = "Town";
+        public static final String POSTCODE = "Postcode";
+        public static final String COUNTY = "County";
+        public static final String COUNTRY = "Country";
+    }
+
     public static void applyMappings(
         String prefix,
         String parentField,
@@ -27,15 +46,15 @@ public class AddressMapper {
      * <p>More: https://tools.hmcts.net/confluence/display/RCCD/Address+global+complex+type
      * */
     private static ImmutableMap<String, String> getAddressMapping(String prefix) {
-        String nestedFieldPrefix = StringUtils.capitalize(prefix + "Address");
+        String nestedFieldPrefix = StringUtils.capitalize(prefix + OcrSuffix.ADDRESS);
         Map<String, String> address = new HashMap<>();
 
-        address.put(nestedFieldPrefix + "Line1", "AddressLine1");
-        address.put(nestedFieldPrefix + "Line2", "AddressLine2");
-        address.put(nestedFieldPrefix + "County", "County");
-        address.put(nestedFieldPrefix + "Postcode", "PostCode");
-        address.put(nestedFieldPrefix + "Town", "PostTown");
-        address.put(nestedFieldPrefix + "Country", "Country");
+        address.put(nestedFieldPrefix + OcrSuffix.LINE_1, Field.LINE_1);
+        address.put(nestedFieldPrefix + OcrSuffix.LINE_2, Field.LINE_2);
+        address.put(nestedFieldPrefix + OcrSuffix.POSTCODE, Field.POSTCODE);
+        address.put(nestedFieldPrefix + OcrSuffix.TOWN, Field.TOWN);
+        address.put(nestedFieldPrefix + OcrSuffix.COUNTY, Field.COUNTY);
+        address.put(nestedFieldPrefix + OcrSuffix.COUNTRY, Field.COUNTRY);
 
         return ImmutableMap.copyOf(address);
     }
