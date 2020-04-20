@@ -21,12 +21,18 @@ public abstract class BulkScanFormTransformer {
         // Need to store the Exception Record ID as part of the CCD data
         caseData.put(BULK_SCAN_CASE_REFERENCE, exceptionRecord.getId());
 
+        caseData.putAll(transformAdditionalDataFromExceptionRecord(exceptionRecord));
+
         Map<String, Object> formSpecificMap = runFormSpecificTransformation(ocrDataFields);
         caseData.putAll(formSpecificMap);
 
         caseData = runPostMappingModification(caseData);
 
         return caseData;
+    }
+
+    protected Map<String, Object> transformAdditionalDataFromExceptionRecord(ExceptionRecord exceptionRecord) {
+        return Collections.emptyMap();
     }
 
     protected abstract Map<String, String> getOcrToCCDMapping();
