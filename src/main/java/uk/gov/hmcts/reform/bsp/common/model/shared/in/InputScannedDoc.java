@@ -1,35 +1,38 @@
 package uk.gov.hmcts.reform.bsp.common.model.shared.in;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Builder
 public class InputScannedDoc {
 
-    public final String type;
-    public final String subtype;
-    public final InputScannedDocUrl document;
-    public final String controlNumber;
-    public final String fileName;
-    public final LocalDateTime scannedDate;
-    public final LocalDateTime deliveryDate;
+    @JsonProperty("type")
+    private String type;
 
-    public InputScannedDoc(
-        @JsonProperty("type") String type,
-        @JsonProperty("subtype") String subtype,
-        @JsonProperty("url") InputScannedDocUrl document,
-        @JsonProperty("control_number") String controlNumber,
-        @JsonProperty("file_name") String fileName,
-        @JsonProperty("scanned_date") LocalDateTime scannedDate,
-        @JsonProperty("delivery_date") LocalDateTime deliveryDate
-    ) {
-        this.type = type;
-        this.subtype = subtype;
-        this.document = document;
-        this.controlNumber = controlNumber;
-        this.fileName = fileName;
-        this.scannedDate = scannedDate;
-        this.deliveryDate = deliveryDate;
-    }
+    @JsonProperty("subtype")
+    private String subtype;
+
+    @JsonProperty("url")
+    private InputScannedDocUrl document;
+
+    @JsonProperty("control_number")
+    private String controlNumber;
+
+    @JsonProperty("file_name")
+    private String fileName;
+
+    @JsonProperty("scanned_date")
+    private LocalDateTime scannedDate;
+
+    @JsonProperty("delivery_date")
+    private LocalDateTime deliveryDate;
 
 }
