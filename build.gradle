@@ -52,7 +52,6 @@ compileTestJava {
 }
 
 repositories {
-    mavenLocal()
     jcenter()
 }
 
