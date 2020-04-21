@@ -25,11 +25,11 @@ public class BulkScanFormTransformerTest {
     @Test
     public void transformIntoCaseDataShouldReturnMapOfCCDFields() {
         List<OcrDataField> input = Arrays.asList(
-            new OcrDataField("OCR_Field1", "value1"),
-            new OcrDataField("OCR_Field2", "value2"),
-            new OcrDataField("OCR_Field3", "value3"),
-            new OcrDataField("OCR_Field4", "value4"),
-            new OcrDataField("OCR_Field5", "value5")
+                new OcrDataField("OCR_Field1", "value1"),
+                new OcrDataField("OCR_Field2", "value2"),
+                new OcrDataField("OCR_Field3", "value3"),
+                new OcrDataField("OCR_Field4", "value4"),
+                new OcrDataField("OCR_Field5", "value5")
         );
 
         Map<String, Object> result = createExceptionRecord(input);
@@ -44,9 +44,9 @@ public class BulkScanFormTransformerTest {
     }
 
     @Test
-    public void shouldTransformExceptionRecordDataAccordingly(){
+    public void shouldTransformExceptionRecordDataAccordingly() {
         Map<String, Object> caseData = bulkScanFormTransformer.transformIntoCaseData(
-            ExceptionRecord.builder().poBox("12345").ocrDataFields(emptyList()).build()
+                ExceptionRecord.builder().poBox("12345").ocrDataFields(emptyList()).build()
         );
 
         assertThat(caseData, hasEntry("transformedPoBox", "12345"));
@@ -55,8 +55,8 @@ public class BulkScanFormTransformerTest {
     @Test
     public void transformIntoCaseDataShouldIgnoreUnknownFields() {
         List<OcrDataField> input = Arrays.asList(
-            new OcrDataField("this field will be ignored", "ignored value"),
-            new OcrDataField("OCR_Field5", "value5")
+                new OcrDataField("this field will be ignored", "ignored value"),
+                new OcrDataField("OCR_Field5", "value5")
         );
 
         Map<String, Object> result = createExceptionRecord(input);
@@ -68,11 +68,11 @@ public class BulkScanFormTransformerTest {
 
     private Map<String, Object> createExceptionRecord(List<OcrDataField> input) {
         return bulkScanFormTransformer.transformIntoCaseData(
-            ExceptionRecord.builder()
-                .formType(ExampleBulkScanFormTransformerFactory.TRANSFORMER_NAME)
-                .ocrDataFields(input)
-                .id(EX_RECORD_ID)
-                .build()
+                ExceptionRecord.builder()
+                        .formType(ExampleBulkScanFormTransformerFactory.TRANSFORMER_NAME)
+                        .ocrDataFields(input)
+                        .id(EX_RECORD_ID)
+                        .build()
         );
     }
 
