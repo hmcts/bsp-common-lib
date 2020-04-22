@@ -1,27 +1,35 @@
 package uk.gov.hmcts.reform.bsp.common.model.shared.in;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExceptionRecord {
 
     @JsonProperty("case_type_id")
-    private final String caseTypeId;
+    private String caseTypeId;
 
     @JsonProperty("id")
-    private final String id;
+    private String id;
 
     @JsonProperty("po_box")
-    private final String poBox;
+    private String poBox;
 
     @JsonProperty("form_type")
-    private final String formType;
+    private String formType;
+
+    @JsonProperty("scanned_documents")
+    private List<InputScannedDoc> scannedDocuments;
 
     @JsonProperty("ocr_data_fields")
-    private final List<OcrDataField> ocrDataFields;
+    private List<OcrDataField> ocrDataFields;
+
 }

@@ -1,11 +1,12 @@
 package uk.gov.hmcts.reform.bsp.common.service.transformation.impl;
 
+import uk.gov.hmcts.reform.bsp.common.model.shared.in.ExceptionRecord;
 import uk.gov.hmcts.reform.bsp.common.service.transformation.BulkScanFormTransformer;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MockBulkScanFormTransformer extends BulkScanFormTransformer {
+public class ExampleBulkScanFormTransformer extends BulkScanFormTransformer {
 
     @Override
     protected Map<String, String> getOcrToCCDMapping() {
@@ -19,4 +20,13 @@ public class MockBulkScanFormTransformer extends BulkScanFormTransformer {
 
         return exceptionRecordToCcdFieldsMap;
     }
+
+    @Override
+    protected Map<String, Object> transformAdditionalDataFromExceptionRecord(ExceptionRecord exceptionRecord) {
+        Map<String, Object> additionalCaseData = new HashMap<>();
+        additionalCaseData.put("transformedPoBox", exceptionRecord.getPoBox());
+
+        return additionalCaseData;
+    }
+
 }
