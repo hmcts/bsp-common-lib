@@ -1,4 +1,5 @@
 # bsp-common-lib [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Java CI](https://github.com/hmcts/bsp-common-lib/workflows/Java%20CI/badge.svg)
 
 Common code for implementing Bulk Scanning
 
