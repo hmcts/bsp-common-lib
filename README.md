@@ -1,4 +1,5 @@
 # bsp-common-lib [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Java CI](https://github.com/hmcts/bsp-common-lib/workflows/Java%20CI/badge.svg)
 
 Common code for implementing Bulk Scanning
 
@@ -8,7 +9,7 @@ Update the version number in build.gradle when making a change as the library wi
 
 ### Working locally
 
-To deploy to local maven repository use `./gradlew publishMainPublicationToMavenLocal`. The other project will need to include local maven to its list of repositories.
+To make sure the in-development version of this is used by the project that depends on this library, please use Gradle's composite build feature (found in the Gradle toolbar in IntelliJ).
 
 ## Testing end-to-end with BSP
 
