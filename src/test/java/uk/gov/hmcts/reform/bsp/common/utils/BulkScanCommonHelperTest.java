@@ -1,9 +1,7 @@
 package uk.gov.hmcts.reform.bsp.common.utils;
 
 import org.hamcrest.CoreMatchers;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import uk.gov.hmcts.reform.bsp.common.error.FormFieldValidationException;
 
 import java.time.LocalDate;
@@ -14,14 +12,11 @@ import static java.time.Month.FEBRUARY;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.rules.ExpectedException.none;
+import static org.junit.Assert.assertThrows;
 
 public class BulkScanCommonHelperTest {
 
     private static final String DATE_FIELD_NAME = "DateFieldName";
-
-    @Rule
-    public ExpectedException expectedException = none();
 
     @Test
     public void shouldTransformDateWithRightLeapYearDate() {
@@ -34,10 +29,9 @@ public class BulkScanCommonHelperTest {
 
     @Test
     public void shouldFailDateTransformationWithWrongLeapYearDate() {
-        expectedException.expect(FormFieldValidationException.class);
-        expectedException.expectMessage("DateFieldName must be a valid date");
-
-        BulkScanCommonHelper.transformFormDateIntoLocalDate(DATE_FIELD_NAME, "29/02/2019");
+        assertThrows(FormFieldValidationException.class, () -> {
+            BulkScanCommonHelper.transformFormDateIntoLocalDate(DATE_FIELD_NAME, "29/02/2019");
+        });
     }
 
     @Test

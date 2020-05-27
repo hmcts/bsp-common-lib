@@ -3,7 +3,7 @@ package uk.gov.hmcts.reform.bsp.common.model.validation.out;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static uk.gov.hmcts.reform.bsp.common.model.validation.out.ValidationStatus.SUCCESS;
 
 public class OcrValidationResultTest {
