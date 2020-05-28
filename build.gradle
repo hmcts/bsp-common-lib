@@ -21,7 +21,7 @@ plugins {
 apply plugin: 'org.springframework.boot'
 
 group 'uk.gov.hmcts.reform'
-version '0.0.38'
+version '0.0.39'
 
 dependencyUpdates.resolutionStrategy = {
     componentSelection { rules ->
@@ -36,9 +36,19 @@ dependencyUpdates.resolutionStrategy = {
     }
 }
 
-checkstyle {
-    maxWarnings = 0
-    toolVersion = '8.26'
+checkstyle.toolVersion = '8.32'
+checkstyle.configFile = new File(rootDir, "checkstyle.xml")
+
+// make build fail on Checkstyle issues (https://github.com/gradle/gradle/issues/881)
+tasks.withType(Checkstyle).each { checkstyleTask ->
+    checkstyleTask.doLast {
+        reports.all { report ->
+            def outputFile = report.destination
+            if (outputFile.exists() && outputFile.text.contains("<error ")) {
+                throw new GradleException("There were checkstyle warnings! For more info check $outputFile")
+            }
+        }
+    }
 }
 
 sourceCompatibility = 1.8
@@ -145,12 +155,11 @@ bintray {
 
 def versions = [
         commonsLang3         : '3.9',
+        junit                : '4.13',
         lombokVersion        : '1.16.18',
+        mockito              : '3.3.3',
         serviceTokenGenerator: '3.0.0',
-        springfoxSwagger     : '2.9.2',
-        junit                : '4.12',
-        lombokVersion        : '1.16.18',
-        mockito              : '3.2.0'
+        springfoxSwagger     : '2.9.2'
 ]
 
 dependencies {

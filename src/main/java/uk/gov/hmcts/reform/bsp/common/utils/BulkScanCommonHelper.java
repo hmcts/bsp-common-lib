@@ -33,7 +33,10 @@ public class BulkScanCommonHelper {
     private static final Pattern COMMA_AND_WHITESPACE = Pattern.compile(",\\s*");
 
     /**
-     * Returns map with only the fields that were not blank from the OCR data.
+     * Strips out all fields with empty or null values and returns map of remaining fields.
+     *
+     * @param ocrDataFields List of ocrDataFields
+     * @return a map with only the fields that were not blank from the OCR data.
      */
     public static Map<String, String> produceMapWithoutEmptyEntries(List<OcrDataField> ocrDataFields) {
         return ocrDataFields.stream()
@@ -54,7 +57,11 @@ public class BulkScanCommonHelper {
     }
 
     /**
-     * Validates that value from given field is a valid date and returns an optional validation message.
+     * Validates date from form and will return a validation error is date is not in correct format.
+     *
+     * @param fieldsMap map of OCR Data fields from which value will be chosen
+     * @param fieldName date field to be formatted
+     * @return an optional validation message.
      */
     public static Optional<String> validateFormDate(Map<String, String> fieldsMap, String fieldName) {
         Optional<String> validationMessage = Optional.empty();

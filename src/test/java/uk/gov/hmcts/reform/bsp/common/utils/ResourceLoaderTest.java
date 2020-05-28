@@ -1,7 +1,6 @@
 package uk.gov.hmcts.reform.bsp.common.utils;
 
 import com.google.common.collect.ImmutableMap;
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import uk.gov.hmcts.reform.bsp.common.error.FileNotFoundException;
 

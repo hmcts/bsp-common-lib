@@ -5,7 +5,7 @@ import org.junit.Test;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static uk.gov.hmcts.reform.bsp.common.utils.TestUtils.isEmptyList;
 
 public class InvalidDataExceptionTest {
