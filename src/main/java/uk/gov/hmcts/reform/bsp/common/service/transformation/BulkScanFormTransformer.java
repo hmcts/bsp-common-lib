@@ -1,5 +1,6 @@
 package uk.gov.hmcts.reform.bsp.common.service.transformation;
 
+import lombok.extern.slf4j.Slf4j;
 import uk.gov.hmcts.reform.bsp.common.error.UnsupportedFormTypeException;
 import uk.gov.hmcts.reform.bsp.common.model.shared.in.ExceptionRecord;
 import uk.gov.hmcts.reform.bsp.common.model.shared.in.OcrDataField;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 
 import static uk.gov.hmcts.reform.bsp.common.config.BspCommonFields.BULK_SCAN_CASE_REFERENCE;
 
+@Slf4j
 public abstract class BulkScanFormTransformer {
 
     public Map<String, Object> transformIntoCaseData(ExceptionRecord exceptionRecord) throws UnsupportedFormTypeException {
@@ -48,10 +50,14 @@ public abstract class BulkScanFormTransformer {
     private Map<String, Object> mapOcrFieldsToCaseData(List<OcrDataField> ocrDataFields) {
         Map<String, String> ocrToCCDMapping = getOcrToCCDMapping();
 
-        return ocrDataFields.stream()
+        Map<String, Object> ocrDataFields1 = ocrDataFields.stream()
             .filter(ocrDataField -> ocrToCCDMapping.containsKey(ocrDataField.getName()))
             .collect(Collectors.toMap(
                 ocrDataField -> ocrToCCDMapping.get(ocrDataField.getName()), OcrDataField::getValue
             ));
+
+        log.info("OCR data fields for mapping: {}", ocrDataFields1);
+
+        return ocrDataFields1;
     }
 }
