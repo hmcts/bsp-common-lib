@@ -52,6 +52,11 @@ public abstract class BulkScanFormTransformer {
 
         Map<String, Object> ocrDataFields1 = ocrDataFields.stream()
             .filter(ocrDataField -> ocrToCCDMapping.containsKey(ocrDataField.getName()))
+            .peek(ocrDataField -> {
+                if (ocrDataField.getValue() == null) {
+                    log.info("Null value for {}", ocrDataField.getName());
+                }
+            })
             .collect(Collectors.toMap(
                 ocrDataField -> ocrToCCDMapping.get(ocrDataField.getName()), OcrDataField::getValue
             ));
