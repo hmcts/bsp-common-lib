@@ -8,6 +8,7 @@ import uk.gov.hmcts.reform.bsp.common.model.shared.in.OcrDataField;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static uk.gov.hmcts.reform.bsp.common.config.BspCommonFields.BULK_SCAN_CASE_REFERENCE;
@@ -51,6 +52,8 @@ public abstract class BulkScanFormTransformer {
         Map<String, String> ocrToCCDMapping = getOcrToCCDMapping();
 
         return ocrDataFields.stream()
+            .filter(ocrDataField -> Objects.nonNull(ocrDataField.getName()))
+            .filter(ocrDataField -> Objects.nonNull(ocrDataField.getValue()))
             .filter(ocrDataField -> ocrToCCDMapping.containsKey(ocrDataField.getName()))
             .peek(ocrDataField -> {
                 if (ocrDataField.getValue() == null) {
