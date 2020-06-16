@@ -6,10 +6,9 @@ import uk.gov.hmcts.reform.bsp.common.model.shared.in.ExceptionRecord;
 import uk.gov.hmcts.reform.bsp.common.model.shared.in.OcrDataField;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static uk.gov.hmcts.reform.bsp.common.config.BspCommonFields.BULK_SCAN_CASE_REFERENCE;
 
@@ -51,21 +50,13 @@ public abstract class BulkScanFormTransformer {
     private Map<String, Object> mapOcrFieldsToCaseData(List<OcrDataField> ocrDataFields) {
         Map<String, String> ocrToCCDMapping = getOcrToCCDMapping();
 
-        Map<String, Object> ocrDataFields1 = ocrDataFields.stream()
-            .filter(ocrDataField -> ocrToCCDMapping.containsKey(ocrDataField.getName()))
-            .filter(ocrDataField -> Objects.nonNull(ocrDataField.getName()))
-            .filter(ocrDataField -> Objects.nonNull(ocrDataField.getValue()))
-            .peek(ocrDataField -> {
-                if (ocrDataField.getValue() == null) {
-                    log.info("Null value for {}", ocrDataField.getName());
-                }
-            })
-            .collect(Collectors.toMap(
-                ocrDataField -> ocrToCCDMapping.get(ocrDataField.getName()), OcrDataField::getValue
-            ));
+        Map<String, Object> caseData = new HashMap<>();
+        ocrDataFields.forEach(ocrDataField -> {
+            if (ocrToCCDMapping.containsKey(ocrDataField.getName())) {
+                caseData.put(ocrToCCDMapping.get(ocrDataField.getName()), ocrDataField.getValue());
+            }
+        });
 
-        log.info("OCR data fields for mapping: {}", ocrDataFields1);
-
-        return ocrDataFields1;
+        return caseData;
     }
 }

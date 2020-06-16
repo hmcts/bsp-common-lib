@@ -28,5 +28,4 @@ public class ExampleBulkScanFormTransformer extends BulkScanFormTransformer {
 
         return additionalCaseData;
     }
-
 }
