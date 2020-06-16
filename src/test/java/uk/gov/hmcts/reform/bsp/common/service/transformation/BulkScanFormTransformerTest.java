@@ -44,9 +44,29 @@ public class BulkScanFormTransformerTest {
     }
 
     @Test
+    public void transformIntoCaseDataShouldReturnMapOfCCDFieldsWithoutNullValues() {
+        List<OcrDataField> input = Arrays.asList(
+            new OcrDataField("OCR_Field1", "value1"),
+            new OcrDataField("OCR_Field2", null),
+            new OcrDataField("OCR_Field3", null),
+            new OcrDataField("OCR_Field4", null),
+            new OcrDataField(null, "testValue")
+            );
+
+        Map<String, Object> result = createExceptionRecord(input);
+
+        assertThat(result.size(), is(3));
+        assertThat(result.getOrDefault("CCD_Field1", ""), is("value1"));
+        assertThat(result.getOrDefault(BULK_SCAN_CASE_REFERENCE, ""), is(EX_RECORD_ID));
+    }
+
+    @Test
     public void shouldTransformExceptionRecordDataAccordingly() {
         Map<String, Object> caseData = bulkScanFormTransformer.transformIntoCaseData(
-                ExceptionRecord.builder().poBox("12345").ocrDataFields(emptyList()).build()
+                ExceptionRecord.builder()
+                    .poBox("12345")
+                    .ocrDataFields(emptyList())
+                    .build()
         );
 
         assertThat(caseData, hasEntry("transformedPoBox", "12345"));
