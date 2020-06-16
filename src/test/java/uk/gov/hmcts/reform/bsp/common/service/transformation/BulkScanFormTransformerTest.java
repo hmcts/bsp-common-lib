@@ -44,19 +44,22 @@ public class BulkScanFormTransformerTest {
     }
 
     @Test
-    public void transformIntoCaseDataShouldReturnMapOfCCDFieldsWithoutNullValues() {
+    public void givenNullOcrDataFieldValues_whenMappingToCaseData_nullValuesWillBeMapped() {
         List<OcrDataField> input = Arrays.asList(
             new OcrDataField("OCR_Field1", "value1"),
             new OcrDataField("OCR_Field2", null),
             new OcrDataField("OCR_Field3", null),
             new OcrDataField("OCR_Field4", null),
             new OcrDataField(null, "testValue")
-            );
+        );
 
         Map<String, Object> result = createExceptionRecord(input);
 
-        assertThat(result.size(), is(3));
-        assertThat(result.getOrDefault("CCD_Field1", ""), is("value1"));
+        input.stream()
+            .filter(ocrDataField -> bulkScanFormTransformer.getOcrToCCDMapping().keySet().contains(ocrDataField.getName()))
+            .forEach(ocrDataField -> assertThat(result, hasEntry(
+                ocrDataField.getName().replace("OCR_Field", "CCD_Field"),
+                ocrDataField.getValue())));
         assertThat(result.getOrDefault(BULK_SCAN_CASE_REFERENCE, ""), is(EX_RECORD_ID));
     }
 
@@ -95,5 +98,4 @@ public class BulkScanFormTransformerTest {
                         .build()
         );
     }
-
 }
