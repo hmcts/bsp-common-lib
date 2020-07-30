@@ -9,19 +9,19 @@ buildscript {
 
 plugins {
     id 'checkstyle'
-    id 'com.github.ben-manes.versions' version '0.22.0'
+    id 'com.github.ben-manes.versions' version '0.29.0'
     id 'com.jfrog.bintray' version '1.8.5'
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java-library'
     id 'maven-publish'
     id 'net.ltgt.apt' version '0.21'
-    id 'org.springframework.boot' version '2.2.0.RELEASE'
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
 }
 
 apply plugin: 'org.springframework.boot'
 
 group 'uk.gov.hmcts.reform'
-version '0.0.43'
+version '0.0.44'
 
 dependencyUpdates.resolutionStrategy = {
     componentSelection { rules ->
@@ -52,6 +52,7 @@ tasks.withType(Checkstyle).each { checkstyleTask ->
 }
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 compileJava {
     options.compilerArgs << '-parameters' << '-Xlint:deprecation'
@@ -68,12 +69,6 @@ repositories {
 jar {
     manifest {
         attributes 'Implementation-Title': project.name, 'Implementation-Version': project.version
-    }
-}
-
-task printVersion {
-    doLast {
-        print project.version
     }
 }
 
@@ -154,10 +149,10 @@ bintray {
 }
 
 def versions = [
-        commonsLang3         : '3.9',
+        commonsLang3         : '3.11',
         junit                : '4.13',
-        lombokVersion        : '1.16.18',
-        mockito              : '3.3.3',
+        lombokVersion        : '1.18.12',
+        mockito              : '3.4.4',
         serviceTokenGenerator: '3.0.0',
         springfoxSwagger     : '2.9.2'
 ]
