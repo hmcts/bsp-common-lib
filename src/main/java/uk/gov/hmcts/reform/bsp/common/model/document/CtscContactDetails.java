@@ -17,6 +17,9 @@ public class CtscContactDetails {
     @JsonProperty("careOf")
     private String careOf;
 
+    @JsonProperty("centreName")
+    private String centreName;
+
     @JsonProperty("poBox")
     private String poBox;
 
