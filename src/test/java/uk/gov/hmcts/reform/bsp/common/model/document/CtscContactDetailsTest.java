@@ -6,7 +6,8 @@ import static org.junit.Assert.assertEquals;
 
 public class CtscContactDetailsTest {
 
-    private static final String CTSC_CARE_OF = "c/o HMCTS Digital Divorce";
+    private static final String CTSC_CENTRE_NAME = "HMCTS Digital Divorce";
+    private static final String CTSC_CARE_OF = "c/o " + CTSC_CENTRE_NAME;
     private static final String CTSC_EMAIL_ADDRESS = "divorcecase@justice.gov.uk";
     private static final String CTSC_OPENING_HOURS = "8:00 - 20:00";
     private static final String CTSC_PHONE_NUMBER = "0300 303 0642";
@@ -21,6 +22,7 @@ public class CtscContactDetailsTest {
         CtscContactDetails ctscContactDetails = CtscContactDetails.builder()
             .serviceCentre(CTSC_SERVICE_CENTRE)
             .careOf(CTSC_CARE_OF)
+            .centreName(CTSC_CENTRE_NAME)
             .poBox(CTSC_PO_BOX)
             .town(CTSC_TOWN)
             .postcode(CTSC_POSTCODE)
@@ -31,6 +33,7 @@ public class CtscContactDetailsTest {
 
         assertEquals(CTSC_SERVICE_CENTRE, ctscContactDetails.getServiceCentre());
         assertEquals(CTSC_CARE_OF, ctscContactDetails.getCareOf());
+        assertEquals(CTSC_CENTRE_NAME, ctscContactDetails.getCentreName());
         assertEquals(CTSC_PO_BOX, ctscContactDetails.getPoBox());
         assertEquals(CTSC_TOWN, ctscContactDetails.getTown());
         assertEquals(CTSC_POSTCODE, ctscContactDetails.getPostcode());
