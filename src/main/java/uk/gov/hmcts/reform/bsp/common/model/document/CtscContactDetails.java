@@ -7,9 +7,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
 @EqualsAndHashCode
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CtscContactDetails {
     @JsonProperty("serviceCentre")
     private String serviceCentre;
