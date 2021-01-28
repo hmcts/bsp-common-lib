@@ -53,7 +53,7 @@ public class GenericMapperTest {
             new OcrDataField("myField", "I will not be found")
         );
 
-        Optional<String> result = getValueFromOcrDataFields("myField", input);
+        Optional<String> result = getValueFromOcrDataFields("myField1", input);
 
         assertThat(result.isPresent(), is(true));
         assertThat(result.get(), is("this should be found"));
