@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -30,9 +31,11 @@ public class InputScannedDoc {
     private String fileName;
 
     @JsonProperty("scanned_date")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime scannedDate;
 
     @JsonProperty("delivery_date")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDateTime deliveryDate;
 
 }
