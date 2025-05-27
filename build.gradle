@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.2.1.RELEASE'
+        springBootVersion = '3.1.4'
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -14,7 +14,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'net.ltgt.apt' version '0.21'
-    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'org.springframework.boot' version '3.1.4'
 }
 
 apply plugin: 'org.springframework.boot'
@@ -127,16 +127,16 @@ publishing {
 }
 
 def versions = [
-        commonsLang3         : '3.11',
-        junit                : '4.13',
-        lombokVersion        : '1.16.18',
-        mockito              : '3.4.4',
-        serviceTokenGenerator: '3.0.0',
-        springfoxSwagger     : '2.9.2'
+        commonsLang3         : '3.13.0',
+        junit                : '4.13.2',
+        lombokVersion        : '1.18.30',
+        mockito              : '5.17.0',
+        serviceTokenGenerator: '5.3.2',
+        springfoxSwagger     : '3.0.0'
 ]
 
 dependencies {
-    implementation group: 'io.springfox', name: 'springfox-swagger2', version: versions.springfoxSwagger
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: versions.commonsLang3
     implementation group: 'org.projectlombok', name: 'lombok', version: versions.lombokVersion
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
