@@ -50,8 +50,8 @@ tasks.withType(Checkstyle).each { checkstyleTask ->
     }
 }
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 21
+targetCompatibility = 21
 
 compileJava {
     options.compilerArgs << '-parameters' << '-Xlint:deprecation'
