@@ -50,8 +50,11 @@ tasks.withType(Checkstyle).each { checkstyleTask ->
     }
 }
 
-sourceCompatibility = 21
-targetCompatibility = 21
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 compileJava {
     options.compilerArgs << '-parameters' << '-Xlint:deprecation'
