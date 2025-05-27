@@ -10,8 +10,6 @@ plugins {
     id 'org.springframework.boot' version '3.1.4'
 }
 
-apply plugin: 'org.springframework.boot'
-
 group 'uk.gov.hmcts.reform'
 version '0.0.48'
 
@@ -60,7 +58,6 @@ compileTestJava {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "https://jitpack.io" }
 }
 
 jar {
