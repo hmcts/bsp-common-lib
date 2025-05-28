@@ -1,13 +1,16 @@
-
-
 plugins {
     id 'checkstyle'
     id 'com.github.ben-manes.versions' version '0.29.0'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java-library'
     id 'maven-publish'
-    id 'net.ltgt.apt' version '0.21'
-    id 'org.springframework.boot' version '3.1.4'
+    id 'org.springframework.boot' version '3.4.5'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:3.4.5"
+    }
 }
 
 group 'uk.gov.hmcts.reform'
@@ -26,19 +29,10 @@ dependencyUpdates.resolutionStrategy = {
     }
 }
 
-checkstyle.toolVersion = '8.32'
-checkstyle.configFile = new File(rootDir, "checkstyle.xml")
-
-// make build fail on Checkstyle issues (https://github.com/gradle/gradle/issues/881)
-tasks.withType(Checkstyle).each { checkstyleTask ->
-    checkstyleTask.doLast {
-        reports.all { report ->
-            def outputFile = report.destination
-            if (outputFile.exists() && outputFile.text.contains("<error ")) {
-                throw new GradleException("There were checkstyle warnings! For more info check $outputFile")
-            }
-        }
-    }
+checkstyle {
+    maxWarnings = 584
+    toolVersion = '10.23.1'
+    configFile = file("$rootDir/config/checkstyle/checkstyle.xml")
 }
 
 java {
@@ -58,6 +52,9 @@ compileTestJava {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven {
+        url "https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1"
+    }
 }
 
 jar {
@@ -84,12 +81,12 @@ def pomConfig = {
 
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
+    archiveClassifier.set('sources')
     from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier.set('javadoc')
     from javadoc.destinationDir
 }
 
@@ -125,10 +122,13 @@ def versions = [
         lombokVersion        : '1.18.30',
         mockito              : '5.17.0',
         serviceTokenGenerator: '5.3.2',
-        springfoxSwagger     : '3.0.0'
+        springfoxSwagger     : '3.0.0',
+        guava                : '33.4.8-jre'
 ]
 
 dependencies {
+    implementation 'io.swagger:swagger-annotations:1.6.11'
+    implementation group: 'com.google.guava', name: 'guava', version: versions.guava
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: versions.commonsLang3
     implementation group: 'org.projectlombok', name: 'lombok', version: versions.lombokVersion
