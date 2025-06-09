@@ -96,6 +96,24 @@ artifacts {
 }
 
 publishing {
+    publications {
+        Main(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId project.group
+            artifactId 'bsp-common-lib'
+            version project.version
+
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'Bulk Scanning common lib')
+                root.appendNode('name', 'Bulk Scanning common lib')
+                root.appendNode('url', gitRepo)
+                root.children().last() + pomConfig
+            }
+        }
+    }
     repositories {
         maven {
             name = "AzureArtifacts"
