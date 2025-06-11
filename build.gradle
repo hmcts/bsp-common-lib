@@ -13,8 +13,10 @@ dependencyManagement {
     }
 }
 
-group 'uk.gov.hmcts.reform'
-version '0.0.48'
+def buildNumber = System.getenv("RELEASE_VERSION")?: "DEV-SNAPSHOT"
+
+group 'com.github.hmcts'
+version buildNumber
 
 dependencyUpdates.resolutionStrategy = {
     componentSelection { rules ->
@@ -137,7 +139,6 @@ def versions = [
 ]
 
 dependencies {
-    implementation 'com.github.hmcts.java-logging:logging:test-6.1.8'
     implementation 'io.swagger:swagger-annotations:1.6.11'
     implementation group: 'com.google.guava', name: 'guava', version: versions.guava
     implementation group: 'jakarta.annotation', name: 'jakarta.annotation-api', version: '2.1.1'
