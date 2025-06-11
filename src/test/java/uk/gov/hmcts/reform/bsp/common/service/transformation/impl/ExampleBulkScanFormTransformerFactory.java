@@ -3,7 +3,7 @@ package uk.gov.hmcts.reform.bsp.common.service.transformation.impl;
 import org.springframework.stereotype.Component;
 import uk.gov.hmcts.reform.bsp.common.service.transformation.BulkScanFormTransformerFactory;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import java.util.HashMap;
 

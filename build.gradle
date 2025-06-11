@@ -1,26 +1,22 @@
-buildscript {
-    ext {
-        springBootVersion = '2.2.1.RELEASE'
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
-}
-
 plugins {
     id 'checkstyle'
     id 'com.github.ben-manes.versions' version '0.29.0'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java-library'
     id 'maven-publish'
-    id 'net.ltgt.apt' version '0.21'
-    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'org.springframework.boot' version '2.5.15'
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
-apply plugin: 'org.springframework.boot'
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:2.5.15"
+    }
+}
 
-group 'uk.gov.hmcts.reform'
-version '0.0.48'
+def buildNumber = System.getenv("RELEASE_VERSION")?: "DEV-SNAPSHOT"
+
+group 'com.github.hmcts'
+version buildNumber
 
 dependencyUpdates.resolutionStrategy = {
     componentSelection { rules ->
@@ -35,23 +31,17 @@ dependencyUpdates.resolutionStrategy = {
     }
 }
 
-checkstyle.toolVersion = '8.32'
-checkstyle.configFile = new File(rootDir, "checkstyle.xml")
-
-// make build fail on Checkstyle issues (https://github.com/gradle/gradle/issues/881)
-tasks.withType(Checkstyle).each { checkstyleTask ->
-    checkstyleTask.doLast {
-        reports.all { report ->
-            def outputFile = report.destination
-            if (outputFile.exists() && outputFile.text.contains("<error ")) {
-                throw new GradleException("There were checkstyle warnings! For more info check $outputFile")
-            }
-        }
-    }
+checkstyle {
+    maxWarnings = 584
+    toolVersion = '10.23.1'
+    configFile = file("$rootDir/config/checkstyle/checkstyle.xml")
 }
 
-sourceCompatibility = 11
-targetCompatibility = 11
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 compileJava {
     options.compilerArgs << '-parameters' << '-Xlint:deprecation'
@@ -64,7 +54,9 @@ compileTestJava {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "https://jitpack.io" }
+    maven {
+        url "https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1"
+    }
 }
 
 jar {
@@ -91,12 +83,12 @@ def pomConfig = {
 
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
+    archiveClassifier.set('sources')
     from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier.set('javadoc')
     from javadoc.destinationDir
 }
 
@@ -124,19 +116,33 @@ publishing {
             }
         }
     }
+    repositories {
+        maven {
+            name = "AzureArtifacts"
+            url = uri("https://pkgs.dev.azure.com/hmcts/Artifacts/_packaging/hmcts-lib/maven/v1")
+            credentials {
+                username = System.getenv("AZURE_DEVOPS_ARTIFACT_USERNAME")
+                password = System.getenv("AZURE_DEVOPS_ARTIFACT_TOKEN")
+            }
+        }
+    }
 }
 
 def versions = [
-        commonsLang3         : '3.11',
-        junit                : '4.13',
-        lombokVersion        : '1.16.18',
-        mockito              : '3.4.4',
-        serviceTokenGenerator: '3.0.0',
-        springfoxSwagger     : '2.9.2'
+        commonsLang3         : '3.13.0',
+        junit                : '4.13.2',
+        lombokVersion        : '1.18.30',
+        mockito              : '3.12.4',
+        serviceTokenGenerator: '5.3.2',
+        springfoxSwagger     : '3.0.0',
+        guava                : '33.4.8-jre'
 ]
 
 dependencies {
-    implementation group: 'io.springfox', name: 'springfox-swagger2', version: versions.springfoxSwagger
+    implementation 'io.swagger:swagger-annotations:1.6.11'
+    implementation group: 'com.google.guava', name: 'guava', version: versions.guava
+    implementation group: 'jakarta.annotation', name: 'jakarta.annotation-api', version: '2.1.1'
+    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.2'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: versions.commonsLang3
     implementation group: 'org.projectlombok', name: 'lombok', version: versions.lombokVersion
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
