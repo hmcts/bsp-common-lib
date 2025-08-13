@@ -19,6 +19,6 @@ public class PostcodeValidator {
 
     private static boolean isPostcodeLengthValid(String postcode) {
         int postcodeLength = postcode.length();
-        return postcodeLength >= 6 && postcodeLength <= 8;
+        return postcodeLength >= 5 && postcodeLength <= 8;
     }
 }

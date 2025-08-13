@@ -20,7 +20,7 @@ public class PostcodeValidatorTest {
 
     @Test
     public void shouldNotProduceErrorMessagesWhenPostcodeLengthIsValid() {
-        String[] validPostcodes = {"M1 1AA", "L1 0AP", "B151TT", "SW15 5PU", "CH5 3QW", "SE279TU", "GL51 0EX"};
+        String[] validPostcodes = {"SW15P", "M11 A", "CV30A", "M1 1AA", "L1 0AP", "B151TT", "SW15 5PU", "CH5 3QW", "SE279TU", "GL51 0EX"};
         for (String validPostcode : validPostcodes) {
             Map<String, String> validPostcodeFieldMap = new HashMap<>();
             validPostcodeFieldMap.put(d8PetitionerPostcodeKey, validPostcode);
@@ -32,8 +32,8 @@ public class PostcodeValidatorTest {
     }
 
     @Test
-    public void shouldProduceWarningWhenPostcodeHasLessThan6Characters() {
-        String[] invalidPostcodes = {"N", "B1", "SE4", "BT7Q", "SW15P", "M11 A", "CV30A"};
+    public void shouldProduceWarningWhenPostcodeHasLessThan5Characters() {
+        String[] invalidPostcodes = {"N", "B1", "SE4", "BT7Q", "SW15", "M11 ", "CV30"};
 
         validateForInput(invalidPostcodes);
     }
